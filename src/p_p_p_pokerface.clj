@@ -43,8 +43,8 @@
 (defn n-of-a-kind? [hand n]
   "Indicates if the hand contains n of a kind."
   (let [ranks (map rank hand)
-        freqs (into #{} (vals (frequencies ranks)))]
-    (contains? freqs n)))
+        freqs (vals (frequencies ranks))]
+    (>= (apply max freqs) n)))
 
 (defn pair? [hand]
   "Exercise 3: Write the function (pair? hand) that returns true if there is a
@@ -52,6 +52,7 @@
   (n-of-a-kind? hand 2))
 
 (assert (pair? pair-hand))
+(assert (pair? three-of-a-kind-hand))
 (assert (not (pair? high-seven)))
 
 (defn three-of-a-kind? [hand]
