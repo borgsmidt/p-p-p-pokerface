@@ -51,7 +51,14 @@
 (assert (not (pair? high-seven)))
 
 (defn three-of-a-kind? [hand]
-  nil)
+  "Exercise 4: Write the function (three-of-a-kind? hand) that returns true if
+   the hand contains a three of a kind."
+  (let [ranks (map rank hand)
+        freqs (into #{} (vals (frequencies ranks)))]
+    (contains? freqs 3)))
+
+(assert (not (three-of-a-kind? two-pairs-hand)))
+(assert (three-of-a-kind? three-of-a-kind-hand))
 
 (defn four-of-a-kind? [hand]
   nil)
