@@ -72,7 +72,14 @@
 (assert (four-of-a-kind? four-of-a-kind-hand))
 
 (defn flush? [hand]
-  nil)
+  "Exercise 6: Write the function (flush? hand) that returns true if the hand is
+   a flush."
+  (let [suits (map suit hand)
+        uniq (into #{} suits)]
+    (= (count uniq) 1)))
+
+(assert (not (flush? pair-hand)))
+(assert (flush? flush-hand))
 
 (defn full-house? [hand]
   nil)
@@ -82,6 +89,15 @@
 
 (defn straight? [hand]
   nil)
+
+; (defn flush? [hand]
+;   "Exercise 6: Write the function (flush? hand) that returns true if the hand is
+;    a flush."
+;   (let [ranks (map rank hand)
+;         uniq (into #{} ranks)
+;         low (apply min uniq)
+;         high (apply max uniq)]
+;     (and (= (count uniq) 5) (= (- high low) 4))))
 
 (defn straight-flush? [hand]
   nil)
