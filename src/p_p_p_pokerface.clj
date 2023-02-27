@@ -40,12 +40,16 @@
 (def low-ace-straight-flush-hand  ["2D" "3D" "4D" "5D" "AD"])
 (def high-ace-straight-flush-hand ["TS" "AS" "QS" "KS" "JS"])
 
+(defn n-of-a-kind? [hand n]
+  "Indicates if the hand contains n of a kind."
+  (let [ranks (map rank hand)
+        freqs (into #{} (vals (frequencies ranks)))]
+    (contains? freqs n)))
+
 (defn pair? [hand]
   "Exercise 3: Write the function (pair? hand) that returns true if there is a
    pair in hand and false if there is no pair in hand."
-  (let [ranks (map rank hand)
-        freqs (into #{} (vals (frequencies ranks)))]
-    (contains? freqs 2)))
+  (n-of-a-kind? hand 2))
 
 (assert (pair? pair-hand))
 (assert (not (pair? high-seven)))
@@ -53,9 +57,7 @@
 (defn three-of-a-kind? [hand]
   "Exercise 4: Write the function (three-of-a-kind? hand) that returns true if
    the hand contains a three of a kind."
-  (let [ranks (map rank hand)
-        freqs (into #{} (vals (frequencies ranks)))]
-    (contains? freqs 3)))
+  (n-of-a-kind? hand 3))
 
 (assert (not (three-of-a-kind? two-pairs-hand)))
 (assert (three-of-a-kind? three-of-a-kind-hand))
@@ -63,9 +65,7 @@
 (defn four-of-a-kind? [hand]
   "Exercise 5: Write the function (four-of-a-kind? hand) that returns true if
    the hand contains a four of a kind."
-  (let [ranks (map rank hand)
-        freqs (into #{} (vals (frequencies ranks)))]
-    (contains? freqs 4)))
+  (n-of-a-kind? hand 4))
 
 (assert (not (four-of-a-kind? two-pairs-hand)))
 (assert (four-of-a-kind? four-of-a-kind-hand))
