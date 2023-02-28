@@ -122,7 +122,15 @@
 (assert (straight? high-ace-straight-hand))
 
 (defn straight-flush? [hand]
-  nil)
+  "Write the function (straight-flush? hand) which returns true if the hand is a
+   straight flush, that is both a straight and a flush, and otherwise false."
+  (and (straight? hand) (flush? hand)))
+
+(assert (not (straight-flush? straight-hand)))
+(assert (not (straight-flush? flush-hand)))
+(assert (straight-flush? straight-flush-hand))
+(assert (straight-flush? low-ace-straight-flush-hand))
+(assert (straight-flush? high-ace-straight-flush-hand))
 
 (defn value [hand]
   nil)
