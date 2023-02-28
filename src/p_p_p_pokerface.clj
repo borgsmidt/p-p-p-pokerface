@@ -104,16 +104,22 @@
 (assert (two-pairs? four-of-a-kind-hand))
 
 (defn straight? [hand]
-  nil)
+  "Exercise 9: Write the function (straight? hand) that returns true if hand is
+   a straight, and otherwise false. Note that an ace is accepted both as a rank
+   1 and rank 14 card in straights."
+  (let [ranks (map rank hand)
+        uniq (into #{} ranks)
+        low (apply min uniq)
+        high (apply max uniq)
+        std-straight? (and (= (count uniq) 5) (= (- high low) 4))
+        low-ace-straight? (= uniq #{2 3 4 5 14})]
+    (or std-straight? low-ace-straight?)))
 
-; (defn flush? [hand]
-;   "Exercise 6: Write the function (flush? hand) that returns true if the hand is
-;    a flush."
-;   (let [ranks (map rank hand)
-;         uniq (into #{} ranks)
-;         low (apply min uniq)
-;         high (apply max uniq)]
-;     (and (= (count uniq) 5) (= (- high low) 4))))
+(assert (not (straight? two-pairs-hand)))
+(assert (straight? straight-hand))
+(assert (straight? low-ace-straight-hand))
+(assert (not (straight? ["2H" "2D" "3H" "4H" "5H"])))
+(assert (straight? high-ace-straight-hand))
 
 (defn straight-flush? [hand]
   nil)
