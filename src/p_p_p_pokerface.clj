@@ -97,7 +97,7 @@
   (let [ranks (map rank hand)
         freqs (vals (frequencies ranks))
         pair-count (count (filter #(>= % 2) freqs))]
-    (or (= pair-count 2) (some #(= % 4) freqs))))
+    (or (= pair-count 2) (four-of-a-kind? hand))))
 
 (assert (two-pairs? two-pairs-hand))
 (assert (not (two-pairs? pair-hand)))
