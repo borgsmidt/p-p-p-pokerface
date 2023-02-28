@@ -121,10 +121,11 @@
 (assert (not (straight? ["2H" "2D" "3H" "4H" "5H"])))
 (assert (straight? high-ace-straight-hand))
 
-(defn straight-flush? [hand]
-  "Write the function (straight-flush? hand) which returns true if the hand is a
-   straight flush, that is both a straight and a flush, and otherwise false."
-  (and (straight? hand) (flush? hand)))
+(def straight-flush?
+  "Exercise 10: Write the function (straight-flush? hand) which returns true if
+   the hand is a straight flush, that is both a straight and a flush, and
+   otherwise false."
+  (every-pred straight? flush?))
 
 (assert (not (straight-flush? straight-hand)))
 (assert (not (straight-flush? flush-hand)))
