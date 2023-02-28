@@ -82,10 +82,26 @@
 (assert (flush? flush-hand))
 
 (defn full-house? [hand]
-  nil)
+  "Exercise 7: Write the function (full-house? hand) that returns true if hand
+   is a full house, and otherwise false."
+  (let [ranks (map rank hand)
+        freqs (into #{} (vals (frequencies ranks)))]
+    (= freqs #{2 3})))
+
+(assert (not (full-house? three-of-a-kind-hand)))
+(assert (full-house? full-house-hand))
 
 (defn two-pairs? [hand]
-  nil)
+  "Exercise 8: Write the function (two-pairs? hand) that return true if hand has
+   two pairs, and otherwise false. Note that a four of a kind is also two pairs."
+  (let [ranks (map rank hand)
+        freqs (vals (frequencies ranks))
+        pair-count (count (filter #(>= % 2) freqs))]
+    (or (= pair-count 2) (some #(= % 4) freqs))))
+
+(assert (two-pairs? two-pairs-hand))
+(assert (not (two-pairs? pair-hand)))
+(assert (two-pairs? four-of-a-kind-hand))
 
 (defn straight? [hand]
   nil)
