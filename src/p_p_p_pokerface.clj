@@ -133,5 +133,26 @@
 (assert (straight-flush? low-ace-straight-flush-hand))
 (assert (straight-flush? high-ace-straight-flush-hand))
 
+(defn high-card? [hand]
+  "All hands have a high card."
+  true)
+
 (defn value [hand]
-  nil)
+  "Exercise 11: Write the function (value hand), which returns the value of a hand"
+  (let [checkers #{[high-card? 0]  [pair? 1]
+                   [two-pairs? 2]  [three-of-a-kind? 3]
+                   [straight? 4]   [flush? 5]
+                   [full-house? 6] [four-of-a-kind? 7]
+                   [straight-flush? 8]}
+        vals (map second (filter #((first %) hand) checkers))]
+    (apply max vals)))
+
+(assert (= (value high-seven) 0))
+(assert (= (value pair-hand) 1))
+(assert (= (value two-pairs-hand) 2))
+(assert (= (value three-of-a-kind-hand) 3))
+(assert (= (value straight-hand) 4))
+(assert (= (value flush-hand) 5))
+(assert (= (value full-house-hand) 6))
+(assert (= (value four-of-a-kind-hand) 7))
+(assert (= (value straight-flush-hand) 8))
